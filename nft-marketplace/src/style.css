@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'IBM BIOS';
+  src: url('/fonts/ibm_bios.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-ibm-bios: 'IBM BIOS', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8F9FB;
+  --color-bg-tertiary: #F3F4F6;
+
+  --color-text-primary: #1A1D1F;
+  --color-text-secondary: #6F767E;
+  --color-text-muted: #9A9FA5;
+
+  --color-accent-primary: #2A2D30;
+  --color-accent-pink: #F2A7BB;
+  --color-accent-pink-light: #FDF2F5;
+  --color-accent-orange: #FF6B35;
+
+  --color-border-default: #E8E8E8;
+  --color-border-light: #EFEFEF;
+
+  --color-success: #22C55E;
+  --color-danger: #EF4444;
+  --color-warning: #F59E0B;
+  --color-eth: #627EEA;
+
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 8px 24px rgba(242, 167, 187, 0.15);
+
+  --width-sidebar: 260px;
+  --spacing-sidebar: 260px;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #F2A7BB;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8899F;
+}
+
+::selection {
+  background: rgba(242, 167, 187, 0.25);
+}
+
+:focus-visible {
+  outline: 2px solid #2A2D30;
+  outline-offset: 2px;
+}
+
+button,
+a {
+  user-select: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+tr {
+  transition: background-color 0.15s ease;
+}
+
+/* Fade-in animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease both;
+}
+
+.animate-fade-in-left {
+  animation: fade-in-left 0.4s ease both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}

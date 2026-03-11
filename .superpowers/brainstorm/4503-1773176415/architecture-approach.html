@@ -1,0 +1,45 @@
+<h2>ACE NFT Marketplace — Architecture Approach</h2>
+<p class="subtitle">How should we structure this Vue.js + Tailwind v4 + Pinia project?</p>
+
+<div class="section">
+  <h3>What we're building</h3>
+  <p>An NFT marketplace dashboard with: sidebar navigation, NFT card grid with filters, user profile/balance panel, activity tabs, and a top creators leaderboard table. All styled to match the dark/light mixed theme from the reference design.</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Single Page App (Recommended)</h3>
+      <p>One Vue app with component-based architecture. Pinia stores for NFT data, user state, and UI filters. All sections as Vue components. Best for a dashboard-style page like this.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Natural fit for dashboard layout</li><li>Shared state via Pinia</li><li>Fast, no page reloads</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Slightly more setup</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Multi-Page with Vue Router</h3>
+      <p>Full routing setup with separate pages for Dashboard, Collections, Settings, etc. Each sidebar link navigates to a distinct view.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Scalable for real app</li><li>Deep linking</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Overkill for recreating one landing page</li><li>More boilerplate</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Static HTML + Vue Islands</h3>
+      <p>Mostly static HTML/Tailwind with small Vue components mounted for interactive parts (filters, tabs, balance widget).</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Simplest setup</li><li>Fast to build</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Doesn't fully leverage Vue/Pinia</li><li>Harder to maintain</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,48 +2,47 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
+import { useAuthStore } from './stores/auth'
 import './style.css'
+
+const pinia = createPinia()
 
 const routes = [
   {
     path: '/',
     name: 'dashboard',
     component: () => import('./views/dashboard/index.vue'),
+    meta: { roles: ['admin', 'creator', 'poster'] },
   },
   {
-    path: '/user-analytics',
-    name: 'user-analytics',
-    component: () => import('./views/user-analytics/index.vue'),
+    path: '/create',
+    name: 'create',
+    component: () => import('./views/create/index.vue'),
+    meta: { roles: ['admin', 'creator'] },
   },
   {
-    path: '/vip-collections',
-    name: 'vip-collections',
-    component: () => import('./views/placeholder/index.vue'),
+    path: '/queue',
+    name: 'queue',
+    component: () => import('./views/queue/index.vue'),
+    meta: { roles: ['admin', 'creator', 'poster'] },
   },
   {
-    path: '/invitation',
-    name: 'invitation',
-    component: () => import('./views/placeholder/index.vue'),
+    path: '/calendar',
+    name: 'calendar',
+    component: () => import('./views/calendar/index.vue'),
+    meta: { roles: ['admin', 'poster'] },
+  },
+  {
+    path: '/team',
+    name: 'team',
+    component: () => import('./views/team/index.vue'),
+    meta: { roles: ['admin'] },
   },
   {
     path: '/settings',
     name: 'settings',
-    component: () => import('./views/placeholder/index.vue'),
-  },
-  {
-    path: '/notification',
-    name: 'notification',
-    component: () => import('./views/placeholder/index.vue'),
-  },
-  {
-    path: '/subscription',
-    name: 'subscription',
-    component: () => import('./views/placeholder/index.vue'),
-  },
-  {
-    path: '/promotion',
-    name: 'promotion',
-    component: () => import('./views/placeholder/index.vue'),
+    component: () => import('./views/settings/index.vue'),
+    meta: { roles: ['admin', 'creator', 'poster'] },
   },
 ]
 
@@ -52,7 +51,14 @@ const router = createRouter({
   routes,
 })
 
+router.beforeEach((to) => {
+  const auth = useAuthStore(pinia)
+  if (to.meta.roles && !to.meta.roles.includes(auth.role)) {
+    return { path: '/' }
+  }
+})
+
 const app = createApp(App)
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.mount('#app')

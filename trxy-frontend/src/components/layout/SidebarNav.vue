@@ -3,13 +3,11 @@ import { useRoute } from 'vue-router'
 import {
   PhCrown,
   PhHouse,
-  PhChartBar,
-  PhHeart,
-  PhUsers,
+  PhPencilLine,
+  PhTray,
+  PhCalendarBlank,
+  PhUsersThree,
   PhGear,
-  PhBell,
-  PhDiamond,
-  PhLightning,
   PhSealCheck,
 } from '@phosphor-icons/vue'
 import { cn } from '@/lib/utils'
@@ -24,13 +22,11 @@ const route = useRoute()
 
 const iconMap = {
   PhHouse,
-  PhChartBar,
-  PhHeart,
-  PhUsers,
+  PhPencilLine,
+  PhTray,
+  PhCalendarBlank,
+  PhUsersThree,
   PhGear,
-  PhBell,
-  PhDiamond,
-  PhLightning,
   PhCrown,
 }
 

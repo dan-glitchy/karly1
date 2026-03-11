@@ -49,7 +49,7 @@ export const creators = [
     id: '2',
     avatar: '/images/asset_8.jpg',
     name: 'BananaCandy',
-    handle: '@bananacandynft',
+    handle: '@bananacandy',
     volume: 7930.00,
     flowPrice: 2.32,
     status: 65.31,

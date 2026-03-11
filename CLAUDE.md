@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-cd nft-marketplace
+cd trxy-frontend
 npm run dev      # Start dev server (Vite)
 npm run build    # Production build
 npm run preview  # Preview production build

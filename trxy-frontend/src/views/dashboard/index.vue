@@ -1,31 +1,57 @@
 <script setup>
+import { computed } from 'vue'
 import {
   PhArrowRight,
   PhTrendUp,
   PhTrendDown,
-  PhShoppingCart,
-  PhCurrencyDollar,
-  PhUsers,
-  PhCopy,
+  PhArticle,
+  PhTray,
+  PhCheckCircle,
 } from '@phosphor-icons/vue'
-import { assetCards, creators } from '@/lib/data'
-import AssetCard from '@/components/AssetCard.vue'
+import { activityFeed, teamMembers } from '@/lib/data'
+import { usePostStore } from '@/stores/posts'
+import { useAuthStore } from '@/stores/auth'
+import PostCard from '@/components/PostCard.vue'
 import ThreeRoseViewer from '@/components/ThreeRoseViewer.vue'
 
-const stats = [
-  { label: 'Total Volume', value: '31,983.48', change: '+12.5%', trend: 'up', icon: 'PhCurrencyDollar' },
-  { label: 'Total Sales', value: '1,293', change: '+8.2%', trend: 'up', icon: 'PhShoppingCart' },
-  { label: 'Active Users', value: '8,421', change: '-2.4%', trend: 'down', icon: 'PhUsers' },
-]
+const postStore = usePostStore()
+const auth = useAuthStore()
 
-const iconMap = { PhCurrencyDollar, PhShoppingCart, PhUsers }
+const stats = computed(() => [
+  {
+    label: 'Total Posts',
+    value: postStore.posts.length.toString(),
+    change: '+12.5%',
+    trend: 'up',
+    icon: 'PhArticle',
+  },
+  {
+    label: 'Queued',
+    value: postStore.queued.length.toString(),
+    change: '+3',
+    trend: 'up',
+    icon: 'PhTray',
+  },
+  {
+    label: 'Total Posted',
+    value: postStore.posted.length.toString(),
+    change: '+8.2%',
+    trend: 'up',
+    icon: 'PhCheckCircle',
+  },
+])
 
-const recentActivity = [
-  { user: creators[0], action: 'Listed a new collection', time: '2 min ago' },
-  { user: creators[1], action: 'Purchased WGMinterfaces #2931', time: '15 min ago' },
-  { user: creators[2], action: 'Updated collection floor price', time: '1 hour ago' },
-  { user: creators[3], action: 'Transferred 3 items', time: '3 hours ago' },
-]
+const iconMap = { PhArticle, PhTray, PhCheckCircle }
+
+const recentPosts = computed(() =>
+  [...postStore.posts]
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 4)
+)
+
+function findUser(userId) {
+  return teamMembers.find(m => m.id === userId) || { name: 'Unknown', avatar: '/images/asset_6.jpg' }
+}
 </script>
 
 <template>
@@ -33,10 +59,10 @@ const recentActivity = [
     <!-- Welcome Header -->
     <section class="mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
       <h1 class="text-3xl font-bold tracking-tight text-text-primary mb-1">
-        Welcome back, Dan
+        Welcome back, {{ auth.currentUser.name }}
       </h1>
       <p class="text-sm text-text-secondary">
-        Here's what's happening with your marketplace today.
+        Here's what's happening with your content today.
       </p>
     </section>
 
@@ -76,12 +102,12 @@ const recentActivity = [
 
     <!-- Two-column layout -->
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8">
-      <!-- Trending Assets -->
+      <!-- Recent Posts -->
       <section class="animate-fade-in-up" style="animation-delay: 0.3s">
         <div class="flex items-center justify-between mb-5">
-          <h2 class="text-xl font-bold text-text-primary">Trending Assets</h2>
+          <h2 class="text-xl font-bold text-text-primary">Recent Posts</h2>
           <RouterLink
-            to="/user-analytics"
+            to="/queue"
             class="group flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-150"
           >
             View all
@@ -90,17 +116,18 @@ const recentActivity = [
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div
-            v-for="(card, index) in assetCards.slice(0, 4)"
-            :key="card.id"
+            v-for="(post, index) in recentPosts"
+            :key="post.id"
             class="animate-fade-in-up"
             :style="{ animationDelay: `${0.35 + index * 0.07}s` }"
           >
-            <AssetCard
-              :image="card.image"
-              :collection="card.collection"
-              :token-id="card.tokenId"
-              :price="card.price"
-              :rating="card.rating"
+            <PostCard
+              :title="post.title"
+              :type="post.type"
+              :status="post.status"
+              :platforms="post.platforms"
+              :thumbnail="post.thumbnail"
+              :created-at="post.createdAt"
             />
           </div>
         </div>
@@ -108,44 +135,45 @@ const recentActivity = [
 
       <!-- Right Column -->
       <div class="space-y-8">
-        <!-- Quick Balance -->
+        <!-- Quick Actions -->
         <section class="bg-accent-primary rounded-2xl p-6 text-white animate-fade-in-up" style="animation-delay: 0.3s">
-          <p class="text-sm text-white/60 mb-1">Your Balance</p>
-          <p class="text-3xl font-bold tracking-tight mb-4">4,892.00</p>
-          <div class="flex items-center gap-2 text-sm text-white/60 mb-5">
-            <span>0x12r45...6HJ9</span>
-            <button class="text-white/80 hover:text-white transition-colors">
-              <PhCopy class="w-3.5 h-3.5" />
-            </button>
-          </div>
+          <p class="text-sm text-white/60 mb-1">Quick Actions</p>
+          <p class="text-xl font-bold tracking-tight mb-4">{{ postStore.ready.length }} posts ready</p>
+          <p class="text-sm text-white/60 mb-5">{{ postStore.queued.length }} in queue</p>
           <div class="grid grid-cols-2 gap-3">
-            <button class="py-2.5 bg-white text-accent-primary font-medium text-sm rounded-xl hover:bg-white/90 transition-colors">
-              Send
-            </button>
-            <button class="py-2.5 bg-white/15 text-white font-medium text-sm rounded-xl hover:bg-white/25 transition-colors">
-              Receive
-            </button>
+            <RouterLink
+              to="/create"
+              class="py-2.5 bg-white text-accent-primary font-medium text-sm rounded-xl hover:bg-white/90 transition-colors text-center"
+            >
+              New Post
+            </RouterLink>
+            <RouterLink
+              to="/queue"
+              class="py-2.5 bg-white/15 text-white font-medium text-sm rounded-xl hover:bg-white/25 transition-colors text-center"
+            >
+              View Queue
+            </RouterLink>
           </div>
         </section>
 
-        <!-- Recent Activity -->
+        <!-- Team Activity -->
         <section class="animate-fade-in-up" style="animation-delay: 0.4s">
-          <h2 class="text-xl font-bold text-text-primary mb-5">Recent Activity</h2>
+          <h2 class="text-xl font-bold text-text-primary mb-5">Team Activity</h2>
           <ul class="space-y-4">
             <li
-              v-for="(activity, index) in recentActivity"
+              v-for="(activity, index) in activityFeed"
               :key="index"
               class="flex items-center gap-3 animate-fade-in-up"
               :style="{ animationDelay: `${0.45 + index * 0.05}s` }"
             >
               <img
-                :src="activity.user.avatar"
-                :alt="activity.user.name"
+                :src="findUser(activity.userId).avatar"
+                :alt="findUser(activity.userId).name"
                 class="w-10 h-10 rounded-full object-cover"
               />
               <div class="flex-1 min-w-0">
                 <p class="text-sm text-text-primary">
-                  <span class="font-medium">{{ activity.user.name }}</span>
+                  <span class="font-medium">{{ findUser(activity.userId).name }}</span>
                 </p>
                 <p class="text-xs text-text-secondary truncate">{{ activity.action }}</p>
               </div>

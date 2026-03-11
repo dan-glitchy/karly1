@@ -5,7 +5,7 @@ export const useAuthStore = defineStore('auth', () => {
   const currentUser = ref({
     id: '1',
     name: 'Dan',
-    avatar: '/images/asset_6.jpg',
+    avatar: '/images/profile.gif',
     handle: '@dan',
     role: 'admin',
     displayRole: 'Lead Admin',

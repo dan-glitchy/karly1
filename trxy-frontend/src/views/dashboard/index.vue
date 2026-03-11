@@ -8,14 +8,16 @@ import {
   PhTray,
   PhCheckCircle,
 } from '@phosphor-icons/vue'
-import { activityFeed, teamMembers } from '@/lib/data'
+import { activityFeed } from '@/lib/data'
 import { usePostStore } from '@/stores/posts'
 import { useAuthStore } from '@/stores/auth'
+import { useTeamStore } from '@/stores/team'
 import PostCard from '@/components/PostCard.vue'
 import ThreeRoseViewer from '@/components/ThreeRoseViewer.vue'
 
 const postStore = usePostStore()
 const auth = useAuthStore()
+const teamStore = useTeamStore()
 
 const stats = computed(() => [
   {
@@ -50,7 +52,7 @@ const recentPosts = computed(() =>
 )
 
 function findUser(userId) {
-  return teamMembers.find(m => m.id === userId) || { name: 'Unknown', avatar: '/images/asset_6.jpg' }
+  return teamStore.findUser(userId)
 }
 </script>
 

@@ -42,7 +42,7 @@ function formatDate(dateStr) {
         :alt="title"
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
       />
-      <StatusBadge :status="status" class="absolute top-3 right-3" />
+      <StatusBadge :status="status" class="absolute top-3 right-3 !bg-white/90 backdrop-blur-sm" />
     </div>
 
     <!-- Content -->

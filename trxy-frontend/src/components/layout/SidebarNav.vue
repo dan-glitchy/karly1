@@ -1,21 +1,19 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import {
-  PhCrown,
   PhHouse,
   PhPencilLine,
   PhTray,
   PhCalendarBlank,
   PhUsersThree,
   PhGear,
-  PhSealCheck,
 } from '@phosphor-icons/vue'
 import { cn } from '@/lib/utils'
 
 defineProps({
   menuItems: { type: Array, required: true },
   user: { type: Object, default: null },
-  promo: { type: Object, default: null },
+  activity: { type: Array, default: () => [] },
 })
 
 const route = useRoute()
@@ -27,7 +25,6 @@ const iconMap = {
   PhCalendarBlank,
   PhUsersThree,
   PhGear,
-  PhCrown,
 }
 
 function isActive(item) {
@@ -81,30 +78,27 @@ function isActive(item) {
       </ul>
     </nav>
 
-    <!-- Promo Card -->
-    <div v-if="promo" class="px-4 pb-4">
-      <div class="bg-white rounded-2xl border border-border-default overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-200">
-        <div class="relative h-32 overflow-hidden">
+    <!-- Team Activity -->
+    <div v-if="activity.length" class="px-4 pb-4">
+      <p class="text-[10px] font-medium text-text-muted uppercase tracking-wider mb-3 px-2">Activity</p>
+      <ul class="space-y-1">
+        <li
+          v-for="(entry, index) in activity"
+          :key="index"
+          class="flex items-start gap-2.5 px-2 py-2 rounded-xl hover:bg-bg-tertiary transition-colors duration-150"
+        >
           <img
-            :src="promo.image"
-            :alt="promo.title"
-            class="w-full h-full object-cover"
+            :src="entry.avatar"
+            :alt="entry.name"
+            class="w-6 h-6 rounded-full object-cover mt-0.5"
           />
-        </div>
-        <div class="p-3">
-          <div class="flex items-center gap-2 mb-2">
-            <div class="w-6 h-6 bg-accent-primary rounded-full flex items-center justify-center">
-              <PhCrown class="w-3 h-3 text-white" weight="fill" />
-            </div>
-            <span class="text-sm font-semibold text-text-primary">{{ promo.title }}</span>
-            <PhSealCheck v-if="promo.verified" class="w-5 h-5 text-success ml-auto" weight="fill" />
+          <div class="min-w-0 flex-1">
+            <p class="text-xs font-medium text-text-primary leading-snug">{{ entry.name }}</p>
+            <p class="text-[11px] text-text-secondary leading-snug mt-0.5 line-clamp-2">{{ entry.action }}</p>
+            <p class="text-[10px] text-text-muted mt-0.5">{{ entry.time }}</p>
           </div>
-          <div class="flex items-center justify-between text-xs text-text-secondary">
-            <span>{{ promo.count }}</span>
-            <span class="font-medium text-text-primary">{{ promo.rating }} <span class="text-text-muted font-normal">Rating</span></span>
-          </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
 
     <!-- User Profile -->
@@ -113,7 +107,7 @@ function isActive(item) {
         <img
           :src="user.avatar"
           :alt="user.name"
-          class="w-10 h-10 rounded-full object-cover"
+          class="w-10 h-10 rounded-full object-cover bg-border-default"
         />
         <div>
           <p class="text-sm font-semibold text-text-primary">{{ user.name }}</p>

@@ -79,10 +79,6 @@ a {
   user-select: none;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
 
 tr {
   transition: background-color 0.15s ease;

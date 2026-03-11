@@ -4,6 +4,7 @@ import { PhCamera, PhMusicNote, PhMonitorPlay } from '@phosphor-icons/vue'
 import { useAuthStore } from '@/stores/auth'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import AvatarPicker from '@/components/AvatarPicker.vue'
 
 const auth = useAuthStore()
 
@@ -29,11 +30,7 @@ const activeRole = computed(() => auth.role)
     <section class="mb-8 animate-fade-in-up" style="animation-delay: 0.2s">
       <h2 class="text-lg font-semibold text-text-primary mb-4">Profile</h2>
       <div class="flex items-center gap-4 p-4 bg-white border border-border-default rounded-2xl">
-        <img
-          :src="auth.currentUser.avatar"
-          :alt="auth.currentUser.name"
-          class="w-16 h-16 rounded-full object-cover"
-        />
+        <AvatarPicker />
         <div>
           <p class="text-lg font-semibold text-text-primary">{{ auth.currentUser.name }}</p>
           <p class="text-sm text-text-secondary">{{ auth.currentUser.handle }}</p>

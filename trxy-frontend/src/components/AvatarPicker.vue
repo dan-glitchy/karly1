@@ -32,7 +32,7 @@ function selectAvatar(src) {
           class="w-16 h-16 rounded-full object-cover bg-bg-tertiary transition-opacity duration-150 group-hover:opacity-75"
         />
         <div class="absolute inset-0 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-          <span class="text-[10px] font-medium text-white bg-accent-primary/80 backdrop-blur-sm px-2 py-1 rounded-full">Edit</span>
+          <span class="text-[10px] font-medium text-bg-primary bg-accent-primary/80 backdrop-blur-sm px-2 py-1 rounded-full">Edit</span>
         </div>
       </button>
     </PopoverTrigger>
@@ -40,7 +40,7 @@ function selectAvatar(src) {
       side="right"
       :side-offset="12"
       align="start"
-      class="w-[280px] p-0 rounded-2xl border border-border-default shadow-card-hover bg-white"
+      class="w-[280px] p-0 rounded-2xl border border-border-default shadow-card-hover bg-bg-card"
     >
       <div class="p-3 border-b border-border-default">
         <p class="text-xs font-medium text-text-primary">Choose Avatar</p>

@@ -119,7 +119,7 @@ function formatDate(dateStr) {
       <!-- Content Grid: Sidebar + Table -->
       <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
         <!-- Sidebar Stats Card -->
-        <div class="bg-white">
+        <div>
           <p class="text-sm text-text-secondary mb-3">
             Your Drafts <span class="text-text-muted">(Total)</span>
           </p>
@@ -136,7 +136,7 @@ function formatDate(dateStr) {
           </p>
 
           <button
-            class="w-full py-3 px-6 bg-accent-primary text-white font-medium rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-150"
+            class="w-full py-3 px-6 bg-accent-primary text-bg-primary font-medium rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-150"
           >
             Create New Draft
           </button>

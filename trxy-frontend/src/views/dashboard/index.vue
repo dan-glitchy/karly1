@@ -73,7 +73,7 @@ function findUser(userId) {
       <div
         v-for="(stat, index) in stats"
         :key="stat.label"
-        class="bg-white border border-border-default rounded-2xl p-5 hover:shadow-card-hover hover:border-accent-pink/30 transition-all duration-200 animate-fade-in-up"
+        class="bg-bg-card border border-border-default rounded-2xl p-5 hover:shadow-card-hover hover:border-accent-pink/30 transition-all duration-200 animate-fade-in-up"
         :style="{ animationDelay: `${0.15 + index * 0.05}s` }"
       >
         <div class="flex items-center justify-between mb-4">
@@ -138,20 +138,20 @@ function findUser(userId) {
       <!-- Right Column -->
       <div class="space-y-8">
         <!-- Quick Actions -->
-        <section class="bg-accent-primary rounded-2xl p-6 text-white animate-fade-in-up" style="animation-delay: 0.3s">
-          <p class="text-sm text-white/60 mb-1">Quick Actions</p>
+        <section class="bg-bg-actions rounded-2xl p-6 text-text-on-actions animate-fade-in-up" style="animation-delay: 0.3s">
+          <p class="text-sm text-text-on-actions/60 mb-1">Quick Actions</p>
           <p class="text-xl font-bold tracking-tight mb-4">{{ postStore.ready.length }} posts ready</p>
-          <p class="text-sm text-white/60 mb-5">{{ postStore.queued.length }} in queue</p>
+          <p class="text-sm text-text-on-actions/60 mb-5">{{ postStore.queued.length }} in queue</p>
           <div class="grid grid-cols-2 gap-3">
             <RouterLink
               to="/create"
-              class="py-2.5 bg-white text-accent-primary font-medium text-sm rounded-xl hover:bg-white/90 transition-colors text-center"
+              class="py-2.5 bg-bg-primary text-text-primary font-medium text-sm rounded-xl hover:opacity-90 transition-colors text-center"
             >
               New Post
             </RouterLink>
             <RouterLink
               to="/queue"
-              class="py-2.5 bg-white/15 text-white font-medium text-sm rounded-xl hover:bg-white/25 transition-colors text-center"
+              class="py-2.5 bg-text-on-actions/15 text-text-on-actions font-medium text-sm rounded-xl hover:bg-text-on-actions/25 transition-colors text-center"
             >
               View Queue
             </RouterLink>

@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import { useAuthStore } from './stores/auth'
+import { useThemeStore } from './stores/theme'
 import './style.css'
 
 const pinia = createPinia()
@@ -61,4 +62,8 @@ router.beforeEach((to) => {
 const app = createApp(App)
 app.use(pinia)
 app.use(router)
+
+const themeStore = useThemeStore(pinia)
+themeStore.init()
+
 app.mount('#app')

@@ -15,7 +15,7 @@ const filters = [
 ]
 
 const roleColors = {
-  admin: 'bg-accent-primary text-white',
+  admin: 'bg-accent-primary text-bg-primary',
   creator: 'bg-accent-pink-light text-accent-pink',
   poster: 'bg-bg-tertiary text-text-secondary',
 }

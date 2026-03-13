@@ -32,22 +32,85 @@
   --color-warning: #F59E0B;
   --color-eth: #627EEA;
 
+  --color-bg-card: #FFFFFF;
+  --color-bg-actions: #2A2D30;
+  --color-text-on-actions: #FFFFFF;
+
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-card-hover: 0 8px 24px rgba(242, 167, 187, 0.15);
+
+  /* shadcn tokens */
+  --color-primary: #2A2D30;
+  --color-primary-foreground: #FFFFFF;
+  --color-background: #FFFFFF;
+  --color-foreground: #1A1D1F;
+  --color-accent: #F3F4F6;
+  --color-accent-foreground: #1A1D1F;
+  --color-secondary: #F3F4F6;
+  --color-secondary-foreground: #1A1D1F;
+  --color-destructive: #EF4444;
+  --color-ring: #2A2D30;
+  --color-input: #E8E8E8;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1A1D1F;
 
   --width-sidebar: 260px;
   --spacing-sidebar: 260px;
 }
 
+/* Dark theme overrides */
+[data-theme="dark"] {
+  --color-bg-primary: #111113;
+  --color-bg-secondary: #1C1C21;
+  --color-bg-tertiary: #2A2A30;
+
+  --color-text-primary: #F0F0F2;
+  --color-text-secondary: #9A9BA2;
+  --color-text-muted: #5C5D63;
+
+  --color-accent-primary: #F0F0F2;
+  --color-accent-pink-light: #2A1F22;
+
+  --color-border-default: transparent;
+  --color-border-light: transparent;
+
+  --color-success: #34D16A;
+  --color-danger: #F06060;
+  --color-warning: #FBBF24;
+
+  --color-bg-card: #1C1C21;
+  --color-bg-actions: #2A2A30;
+  --color-text-on-actions: #F0F0F2;
+
+  --shadow-card: none;
+  --shadow-card-hover: none;
+
+  /* shadcn tokens */
+  --color-primary: #F0F0F2;
+  --color-primary-foreground: #111113;
+  --color-background: #111113;
+  --color-foreground: #F0F0F2;
+  --color-accent: #242428;
+  --color-accent-foreground: #F0F0F2;
+  --color-secondary: #242428;
+  --color-secondary-foreground: #F0F0F2;
+  --color-destructive: #F06060;
+  --color-ring: #F0F0F2;
+  --color-input: transparent;
+  --color-popover: #1C1C21;
+  --color-popover-foreground: #F0F0F2;
+}
+
 body {
   margin: 0;
-  background: #ffffff;
+  background: var(--color-bg-primary, #ffffff);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 ::-webkit-scrollbar {
@@ -70,7 +133,7 @@ html {
 }
 
 :focus-visible {
-  outline: 2px solid #2A2D30;
+  outline: 2px solid var(--color-accent-primary, #2A2D30);
   outline-offset: 2px;
 }
 

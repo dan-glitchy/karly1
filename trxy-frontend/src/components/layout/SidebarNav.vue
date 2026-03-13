@@ -57,7 +57,7 @@ function isActive(item) {
             :class="cn(
               'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors duration-150 group relative',
               isActive(item)
-                ? 'bg-accent-primary text-white'
+                ? 'bg-accent-primary text-bg-primary'
                 : 'text-text-secondary hover:bg-accent-pink-light hover:text-text-primary'
             )"
           >

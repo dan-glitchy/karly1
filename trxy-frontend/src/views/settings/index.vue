@@ -2,11 +2,13 @@
 import { computed } from 'vue'
 import { PhCamera, PhMusicNote, PhMonitorPlay } from '@phosphor-icons/vue'
 import { useAuthStore } from '@/stores/auth'
+import { useThemeStore } from '@/stores/theme'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import AvatarPicker from '@/components/AvatarPicker.vue'
 
 const auth = useAuthStore()
+const themeStore = useThemeStore()
 
 const platforms = [
   { id: 'instagram', label: 'Instagram', icon: PhCamera, connected: true },
@@ -15,6 +17,7 @@ const platforms = [
 ]
 
 const roles = ['admin', 'creator', 'poster']
+const themes = ['light', 'dark']
 const activeRole = computed(() => auth.role)
 </script>
 
@@ -29,7 +32,7 @@ const activeRole = computed(() => auth.role)
     <!-- Profile -->
     <section class="mb-8 animate-fade-in-up" style="animation-delay: 0.2s">
       <h2 class="text-lg font-semibold text-text-primary mb-4">Profile</h2>
-      <div class="flex items-center gap-4 p-4 bg-white border border-border-default rounded-2xl">
+      <div class="flex items-center gap-4 p-4 bg-bg-card border border-border-default rounded-2xl">
         <AvatarPicker />
         <div>
           <p class="text-lg font-semibold text-text-primary">{{ auth.currentUser.name }}</p>
@@ -48,7 +51,7 @@ const activeRole = computed(() => auth.role)
         <div
           v-for="platform in platforms"
           :key="platform.id"
-          class="flex items-center justify-between p-4 bg-white border border-border-default rounded-2xl"
+          class="flex items-center justify-between p-4 bg-bg-card border border-border-default rounded-2xl"
         >
           <div class="flex items-center gap-3">
             <component :is="platform.icon" class="w-6 h-6 text-text-primary" weight="duotone" />
@@ -66,8 +69,27 @@ const activeRole = computed(() => auth.role)
 
     <Separator class="mb-8" />
 
+    <!-- Theme -->
+    <section class="mb-8 animate-fade-in-up" style="animation-delay: 0.4s">
+      <h2 class="text-lg font-semibold text-text-primary mb-4">Theme</h2>
+      <div class="flex items-center gap-3">
+        <Button
+          v-for="t in themes"
+          :key="t"
+          :variant="themeStore.theme === t ? 'default' : 'outline'"
+          size="sm"
+          class="capitalize"
+          @click="themeStore.setTheme(t)"
+        >
+          {{ t }}
+        </Button>
+      </div>
+    </section>
+
+    <Separator class="mb-8" />
+
     <!-- Role Switcher (Dev Tool) -->
-    <section class="animate-fade-in-up" style="animation-delay: 0.4s">
+    <section class="animate-fade-in-up" style="animation-delay: 0.5s">
       <h2 class="text-lg font-semibold text-text-primary mb-1">Role Switcher</h2>
       <p class="text-xs text-text-muted mb-4">Dev tool — switch roles to preview different access levels.</p>
       <div class="flex items-center gap-3">

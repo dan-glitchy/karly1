@@ -11,7 +11,7 @@ const emit = defineEmits(['click'])
 
 <template>
   <button
-    class="flex items-center gap-3 px-4 py-2.5 bg-white border border-border-default rounded-xl hover:border-accent-pink/40 hover:bg-accent-pink-light transition-colors duration-150"
+    class="flex items-center gap-3 px-4 py-2.5 bg-bg-card border border-border-default rounded-xl hover:border-accent-pink/40 hover:bg-accent-pink-light transition-colors duration-150"
     @click="emit('click')"
   >
     <span class="text-sm text-text-muted">{{ label }}</span>

@@ -34,7 +34,7 @@ function formatDate(dateStr) {
 </script>
 
 <template>
-  <div class="bg-white rounded-2xl border border-border-default overflow-hidden shadow-card hover:shadow-card-hover hover:border-accent-pink/30 hover:-translate-y-1 transition-all duration-200 cursor-pointer group">
+  <div class="bg-bg-card rounded-2xl border border-border-default overflow-hidden shadow-card hover:shadow-card-hover hover:border-accent-pink/30 hover:-translate-y-1 transition-all duration-200 cursor-pointer group">
     <!-- Thumbnail -->
     <div class="relative aspect-[4/3] overflow-hidden">
       <img
@@ -42,7 +42,7 @@ function formatDate(dateStr) {
         :alt="title"
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
       />
-      <StatusBadge :status="status" class="absolute top-3 right-3 !bg-white/90 backdrop-blur-sm" />
+      <StatusBadge :status="status" class="absolute top-3 right-3 !bg-bg-primary/90 backdrop-blur-sm" />
     </div>
 
     <!-- Content -->

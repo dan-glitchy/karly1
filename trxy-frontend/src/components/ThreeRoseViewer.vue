@@ -229,7 +229,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="container" class="w-full h-full cursor-pointer relative">
-    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-bg-primary to-transparent pointer-events-none" />
     <div
       class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 pointer-events-none"
       :class="hovered ? 'opacity-100' : 'opacity-0'"

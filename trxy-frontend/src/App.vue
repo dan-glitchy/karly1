@@ -27,7 +27,7 @@ const activity = computed(() =>
 </script>
 
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-bg-primary">
     <SidebarNav :menu-items="filteredMenuItems" :user="user" :activity="activity" />
     <main class="ml-sidebar min-h-screen">
       <router-view />

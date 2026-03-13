@@ -99,7 +99,7 @@ const platformIcons = {
           v-for="(cell, index) in calendarDays"
           :key="index"
           class="min-h-[100px] border-r border-b border-border-default p-2"
-          :class="cell.day ? 'bg-white' : 'bg-bg-secondary'"
+          :class="cell.day ? 'bg-bg-primary' : 'bg-bg-secondary'"
         >
           <span v-if="cell.day" class="text-xs font-medium text-text-secondary">{{ cell.day }}</span>
 
